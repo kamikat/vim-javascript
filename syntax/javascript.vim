@@ -239,17 +239,17 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsEnvComment           PreProc
   HiLink jsBlockComment         Comment
   HiLink jsCommentTodo          Todo
-  HiLink jsCvsTag               Function
-  HiLink jsDocTags              Special
-  HiLink jsDocSeeTag            Function
+  HiLink jsCvsTag               Ignore
+  HiLink jsDocTags              SpecialComment
+  HiLink jsDocSeeTag            SpecialComment
   HiLink jsDocType              Type
   HiLink jsDocTypeNoParam       Type
-  HiLink jsDocParam             Label
+  HiLink jsDocParam             SpecialComment
   HiLink jsStringS              String
   HiLink jsStringD              String
   HiLink jsTemplateString       String
   HiLink jsTaggedTemplate       StorageClass
-  HiLink jsTernaryIfOperator    Conditional
+  HiLink jsTernaryIfOperator    Operator
   HiLink jsRegexpString         String
   HiLink jsRegexpBoundary       SpecialChar
   HiLink jsRegexpQuantifier     SpecialChar
@@ -259,7 +259,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsRegexpGroup          jsRegexpString
   HiLink jsRegexpCharClass      Character
   HiLink jsCharacter            Character
-  HiLink jsPrototype            Special
+  HiLink jsPrototype            Keyword
   HiLink jsConditional          Conditional
   HiLink jsBranch               Conditional
   HiLink jsLabel                Label
@@ -273,7 +273,8 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsFunction             Type
   HiLink jsGenerator            jsFunction
   HiLink jsFuncName             Function
-  HiLink jsArgsObj              Special
+  HiLink jsFunctionKey          jsFuncName
+  HiLink jsArgsObj              Keyword
   HiLink jsError                Error
   HiLink jsParensError          Error
   HiLink jsParensErrA           Error
@@ -281,11 +282,11 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsParensErrC           Error
   HiLink jsOperator             Operator
   HiLink jsOf                   Operator
-  HiLink jsStorageClass         StorageClass
+  HiLink jsStorageClass         Keyword
   HiLink jsClass                Structure
-  HiLink jsThis                 Special
-  HiLink jsStatic               Special
-  HiLink jsSuper                Special
+  HiLink jsThis                 Keyword
+  HiLink jsStatic               StorageClass
+  HiLink jsSuper                Keyword
   HiLink jsNan                  Number
   HiLink jsNull                 Type
   HiLink jsUndefined            Type
@@ -301,10 +302,10 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsFuncParens           Noise
   HiLink jsSpecial              Special
   HiLink jsTemplateVar          Special
-  HiLink jsGlobalObjects        Special
+  HiLink jsGlobalObjects        Structure
   HiLink jsExceptions           Special
   HiLink jsFutureKeys           Special
-  HiLink jsBuiltins             Special
+  HiLink jsBuiltins             Function
   HiLink jsModules              Include
   HiLink jsModuleWords          Include
   HiLink jsDecorator            Special
