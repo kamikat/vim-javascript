@@ -60,7 +60,7 @@ syntax match   jsFloat            /\c\<\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%(e[+-]\=
 
 " Regular Expressions
 syntax match   jsSpecial            contained "\v\\%(x\x\x|u%(\x{4}|\{\x{4,5}})|c\u|.)"
-syntax region  jsTemplateExpression contained matchgroup=jsTemplateBraces start=+${+ end=+}+ contains=@jsExpression keepend
+syntax region  jsTemplateExpression contained start=+${+ skip=+\\}+ end=+}+ keepend
 syntax region  jsRegexpCharClass    contained start=+\[+ skip=+\\.+ end=+\]+ contains=jsSpecial extend
 syntax match   jsRegexpBoundary     contained "\v\c[$^]|\\b"
 syntax match   jsRegexpBackRef      contained "\v\\[1-9]\d*"
@@ -174,7 +174,6 @@ syntax match   jsArrowFuncArgs  /([^()]*)\ze\s*=>/ contains=jsFuncArgs skipempty
 
 exe 'syntax match jsFunction /\<function\>/      skipwhite skipempty nextgroup=jsGenerator,jsFuncName,jsFuncArgs,jsFlowFunctionGroup skipwhite '.(exists('g:javascript_conceal_function') ? 'conceal cchar='.g:javascript_conceal_function : '')
 exe 'syntax match jsArrowFunction /=>/           skipwhite skipempty nextgroup=jsFuncBlock,jsCommentFunction '.(exists('g:javascript_conceal_arrow_function') ? 'conceal cchar='.g:javascript_conceal_arrow_function : '')
-exe 'syntax match jsArrowFunction /()\ze\s*=>/   skipwhite skipempty nextgroup=jsArrowFunction '.(exists('g:javascript_conceal_noarg_arrow_function') ? 'conceal cchar='.g:javascript_conceal_noarg_arrow_function : '')
 exe 'syntax match jsArrowFunction /_\ze\s*=>/    skipwhite skipempty nextgroup=jsArrowFunction '.(exists('g:javascript_conceal_underscore_arrow_function') ? 'conceal cchar='.g:javascript_conceal_underscore_arrow_function : '')
 
 " Classes
@@ -287,7 +286,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsGenerator            jsFunction
   HiLink jsArrowFuncArgs        jsFuncArgs
   HiLink jsFuncName             Function
-  HiLink jsFuncCall             Function
+  HiLink jsFuncCall             Noise
   HiLink jsClassFuncName        jsFuncName
   HiLink jsObjectFuncName       Function
   HiLink jsArguments            Special
@@ -327,28 +326,28 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsRepeatBraces         Noise
   HiLink jsSwitchBraces         Noise
   HiLink jsSpecial              Special
-  HiLink jsTemplateBraces       Noise
-  HiLink jsGlobalObjects        Constant
-  HiLink jsGlobalNodeObjects    Constant
-  HiLink jsExceptions           Constant
-  HiLink jsBuiltins             Constant
+  HiLink jsTemplateExpression   Special
+  HiLink jsGlobalObjects        Type
+  HiLink jsGlobalNodeObjects    Type
+  HiLink jsExceptions           Type
+  HiLink jsBuiltins             Type
   HiLink jsImport               Include
   HiLink jsExport               Include
-  HiLink jsExportDefault        StorageClass
+  HiLink jsExportDefault        Include
   HiLink jsExportDefaultGroup   jsExportDefault
   HiLink jsModuleAs             Include
   HiLink jsModuleComma          jsNoise
   HiLink jsModuleAsterisk       Noise
   HiLink jsFrom                 Include
-  HiLink jsDecorator            Special
+  HiLink jsDecorator            Function
   HiLink jsDecoratorFunction    Function
-  HiLink jsParensDecorator      jsParens
-  HiLink jsFuncArgOperator      jsFuncArgs
+  HiLink jsParensDecorator      Function
+  HiLink jsFuncArgOperator      Operator
   HiLink jsClassProperty        jsObjectKey
   HiLink jsObjectShorthandProp  jsObjectKey
   HiLink jsSpreadOperator       Operator
   HiLink jsRestOperator         Operator
-  HiLink jsRestExpression       jsFuncArgs
+  HiLink jsRestExpression       Noise
   HiLink jsSwitchColon          Noise
   HiLink jsClassMethodType      Type
   HiLink jsObjectMethodType     Type
@@ -357,7 +356,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   HiLink jsBlockLabelKey        jsBlockLabel
 
   HiLink jsDestructuringBraces     Noise
-  HiLink jsDestructuringProperty   jsFuncArgs
+  HiLink jsDestructuringProperty   Noise
   HiLink jsDestructuringAssignment jsObjectKey
   HiLink jsDestructuringNoise      Noise
 
